@@ -21,7 +21,7 @@
             
         }
     }
-    new InjectWindow();
+    const window = new InjectWindow();
     const url = location.href;
     if(url.includes("/javascript-injector")) {
         return new OptionsWindow();
