@@ -10,18 +10,20 @@
 // ==/UserScript==
 
 (function() {
+    "use strict";
     class InjectWindow {
         constructor() {
+            console.log("InjectJS Loaded");
         }
     }
-    class InjectOptions extends InjectWindow {
+    class OptionsWindow extends InjectWindow {
         constructor() {
             
         }
     }
-    "use strict";
+    new InjectWindow();
     const url = location.href;
     if(url.includes("/javascript-injector")) {
-        return new InjectOptions();
+        return new OptionsWindow();
     }
 })();
