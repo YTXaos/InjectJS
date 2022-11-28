@@ -11,19 +11,9 @@
 
 (function() {
     "use strict";
-    class InjectWindow {
-        constructor() {
-            console.log("InjectJS Loaded");
-        }
-    }
-    class OptionsWindow extends InjectWindow {
-        constructor() {
-            
-        }
-    }
-    const window = new InjectWindow();
+    alert("hi");
     const url = location.href;
     if(url.includes("/javascript-injector")) {
-        return new OptionsWindow();
+        return "hi";
     }
 })();
