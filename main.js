@@ -11,6 +11,9 @@
 
 (function() {
     "use strict";
+    function OptionsPage() {
+        
+    }
     alert("hi");
     const url = location.href;
     if(url.includes("/javascript-injector")) {

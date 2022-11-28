@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 1em;
+}
+.container {
+  border: 1px solid #e3e1e1;
+  width: 100px;
+  height: 10px;
+}
