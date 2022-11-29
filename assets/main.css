@@ -1,0 +1,7 @@
+.js-injector-popup {
+  position: fixed;
+  z-index: 9999;
+  background: inherit;
+  color: inherit;
+  display: none;
+}
