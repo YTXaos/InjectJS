@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      1.06
+// @version      1.07
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -32,8 +32,8 @@
     document.head.prepend(style);
     document.body.prepend(popup);
     function OptionsPage() {
-        document.querySelector("link").remove();
-        document.querySelector("style").remove();
+        document.querySelector("link") && (document.querySelector("link").remove());
+        document.querySelector("style") && (document.querySelector("style").remove());
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
     }

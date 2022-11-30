@@ -117,7 +117,7 @@ body {
 <script>
 window.storage = localStorage;
 const storage = window.storage;
-const options = {}
+let options = storage.getItem("injectjs-options") || {};
 function option(id) {
     return document.querySelector(`[option-id=${id}]`);
 }
