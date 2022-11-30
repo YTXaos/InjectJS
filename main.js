@@ -17,7 +17,7 @@
     const options = JSON.parse(localStorage.getItem("injectjs-options")), popup = document.createElement("div"), style = document.createElement("style");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
-    popup.style.display = "none";
+    popup.setAttribute("style", "display: none;");
     popup.innerHTML = `
     <label class="js-inject-header">
     <div class="js-logo-needle">.....</div>
