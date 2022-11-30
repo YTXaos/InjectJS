@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.04
 // @description  Inject javascript into almost every website you visit.
-// @author       You
+// @author       YTXaos
 // @match        *://*/*
 // @icon         https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logo.png
 // @grant        none
