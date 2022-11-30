@@ -7,6 +7,7 @@
 // @match        *://*/*
 // @icon         https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logo.png
 // @grant        none
+// @license      MIT
 // @updateURL    https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // @downloadURL  https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // ==/UserScript==
