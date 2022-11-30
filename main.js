@@ -46,7 +46,7 @@
     }
     function InjectCode() {
         const code = document.querySelector(".js-code-inject").value;
-        const show_alerts = options.ShowAlerts;
+        const show_alerts = options.show_alerts;
         try {
             eval(code);
         } catch(e) {
