@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      1
+// @version      1.01
 // @description  Inject javascript into almost every website you visit.
 // @author       You
 // @match        *://*/*
@@ -14,8 +14,7 @@
 (function() {
     "use strict";
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
-    const popup = document.createElement("div");
-    const style = document.createElement("style");
+    const options = JSON.parse(localStorage.getItem("injectjs-options")), popup = document.createElement("div"), style = document.createElement("style");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
     popup.innerHTML = `
@@ -80,7 +79,7 @@ body {
     }
     function InjectCode() {
         const code = document.querySelector(".js-code-inject").value;
-        const show_alerts = false; // TEMP
+        const show_alerts = options.ShowAlerts;
         try {
             eval(code);
         } catch(e) {
