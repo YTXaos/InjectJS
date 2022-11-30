@@ -22,7 +22,7 @@
     <label class="js-inject-header">
     <div class="js-logo-needle">.....</div>
     Inject<span class="js-logo">JS</span></label>
-    <textarea placeholder="Your code here" class="js-code-inject" spellcheck="off"></textarea>
+    <textarea placeholder="Your code here" class="js-code-inject" spellcheck="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
     <button class="execute-code" disabled>Execute</button>`;
     document.head.prepend(style);
     document.body.prepend(popup);
