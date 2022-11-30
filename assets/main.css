@@ -11,6 +11,7 @@
   max-height: 500px;
   max-width: 500px;
   left: 50%;
+  display: none;
   transform: translateX(-50%);
 }
 .js-inject-header {
