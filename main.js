@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      1.03
+// @version      1.04
 // @description  Inject javascript into almost every website you visit.
 // @author       You
 // @match        *://*/*
@@ -13,10 +13,15 @@
 
 (function() {
     "use strict";
+    const url = location.href, origin = location.origin;
+    function onURL(href, page) {
+        return origin === `${href}${page}`;
+    }
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
     const options = JSON.parse(localStorage.getItem("injectjs-options")), popup = document.createElement("div"), style = document.createElement("style");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
+    popup.setAttribute("style", "display: none;");
     popup.innerHTML = `
     <label class="js-inject-header">
     <div class="js-logo-needle">.....</div>
@@ -91,11 +96,7 @@
         }
         popup.classList.toggle("show");
     }
-    const url = location.href;
-    function onURL(url, page) {
-        return url === `${url}${page}`;
-    }
-    if(onURL(url, "/inject-js/options")) {
+    if(onURL(origin, "/inject-js/options")) {
         OptionsPage();
     }
     document.addEventListener("keyup", function(e) {
