@@ -80,7 +80,16 @@ body {
     }
     function InjectCode() {
         const code = document.querySelector(".js-code-inject").value;
-        eval(code);
+        const show_alerts = false; // TEMP
+        try {
+            eval(code);
+        } catch(e) {
+            if(show_alerts) {
+                alert(e.message);
+            } else {
+                console.error(e.message);
+            }
+        }
     }
     function ShowInjector(event) {
         dragElement(document.querySelector(".js-injector-popup"));
@@ -118,7 +127,10 @@ body {
         popup.classList.toggle("show");
     }
     const url = location.href;
-    if(url.includes("/InjectJS/options")) {
+    function onURL(url, page) {
+        return url === `${url}${page}`;
+    }
+    if(onURL(url, "/inject-js/options")) {
         OptionsPage();
     }
     document.addEventListener("keyup", function(e) {
