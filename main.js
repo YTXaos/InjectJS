@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      1.05
+// @version      1.06
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -16,7 +16,7 @@
     "use strict";
     const url = location.href, origin = location.origin;
     function onURL(href, page) {
-        return origin === `${href}${page}`;
+        return url === `${href}${page}`;
     }
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
     const options = JSON.parse(localStorage.getItem("injectjs-options")), popup = document.createElement("div"), style = document.createElement("style");
