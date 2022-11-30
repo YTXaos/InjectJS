@@ -4,7 +4,6 @@
   background: inherit;
   color: inherit;
   box-sizing: border-box;
-  display: none;
   border: 1px solid #e3e1e1;
   padding: 0.5em;
   border-radius: 0.25rem;
@@ -78,5 +77,5 @@
   background: #b1a00c;
 }
 .js-injector-popup.show {
-  display: block;
+  display: block !important;
 }

@@ -17,6 +17,7 @@
     const options = JSON.parse(localStorage.getItem("injectjs-options")), popup = document.createElement("div"), style = document.createElement("style");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
+    popup.style.display = "none";
     popup.innerHTML = `
     <label class="js-inject-header">
     <div class="js-logo-needle">.....</div>
@@ -28,42 +29,8 @@
     function OptionsPage() {
         document.querySelector("link").remove();
         document.querySelector("style").remove();
-        document.querySelector("title").innerHTML = `InjectJS Options`;
-        const tag = document.createElement("style");
-        tag.innerHTML = `:root {
-  --background-1: #f7f7f7;
-  --background-2: #fff;
-  color: black;
-}
-/*
-@media (prefers-color-scheme: dark) {
-    :root {
-      --background-1: #2d2d2d;
-      --background-2: #2e2e2e;
-      color: white;
-    }
-}*/
-html {
-  all: unset;
-}
-body {
-  margin: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-  padding: 1em;
-  width: 100vw;
-  height: 100vh;
-  background: var(--background-1);
-}
-.container {
-  border: 1px solid #e3e1e1;
-  width: 5rem;
-  height: 10rem;
-  background: var(--background-2);
-}
-`;
-        document.head.append(tag);
-        document.body.innerHTML = '<div class="container">InjectJS Options</div>';
+        document.title = "InjectJS Options";
+        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
     }
     const code = document.querySelector(".js-code-inject"), btn = document.querySelector(".execute-code");
     code.addEventListener("input", CheckCode);
