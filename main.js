@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
+// @version      1
+// @description  Inject javascript into almost every website you visit.
 // @author       You
 // @match        *://*/*
-// @icon         https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/2048px-Unofficial_JavaScript_logo_2.svg.png
+// @icon         https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logo.png
 // @grant        none
 // ==/UserScript==
 
@@ -14,88 +14,7 @@
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
     const popup = document.createElement("div");
     const style = document.createElement("style");
-    style.innerHTML = `.js-injector-popup {
-    position: fixed;
-    z-index: 9999;
-    background: inherit;
-    color: inherit;
-    box-sizing: border-box;
-    display: none;
-    border: 1px solid #e3e1e1;
-    padding: 0.5em;
-    border-radius: 0.25rem;
-    overflow: auto;
-    max-height: 500px;
-    max-width: 500px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.js-inject-header {
-    display: block;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-.js-logo-needle {
-    background-image: url(https://cdn2.iconfinder.com/data/icons/blood-donation-21/512/Syringe-512.png);
-    background-repeat: no-repeat;
-    background-size: 25px;
-    display: inline-block;
-    color: transparent;
-    background-position: center;
-}
-.js-inject-header .js-logo {
-    color: gold;
- }
-.js-code-inject {
-    resize: both !important;
-    box-sizing: border-box;
-    padding: 0.3em;
-    background: inherit;
-    color: white;
-    border-radius: 0.25rem;
-    outline: none;
-    transition: box-shadow .15s ease-in-out;
-    font-family: arial;
-    display: block;
-    height: 7rem;
-    margin-bottom: 0.5rem;
- }
-.js-code-inject:focus {
-    box-shadow: 0 0 0 3px rgb(0 123 255 / 57%);
-}
-.execute-code {
-    all: revert;
-    background: #f8e12e;
-    border: none;
-    color: white;
-    padding: 0.3em 0.4em;
-    cursor: pointer;
-    display: block;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    position: relative;
-    outline: none;
-    width: 100%;
-    box-sizing: border-box;
-}
-.execute-code:disabled {
-    background: rgb(187, 186, 186);
-    color: white;
-    pointer-events: none;
-}
-.execute-code:hover {
-    background: #e5d11d;
-}
-.execute-code:active {
-    background: #b1a00c;
-}
-.js-injector-popup.show {
-    display: block;
- }`;
+    fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
     popup.innerHTML = `
     <label class="js-inject-header">
