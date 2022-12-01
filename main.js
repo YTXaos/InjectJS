@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      1.08
+// @version      1.09
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -37,21 +37,7 @@
     document.head.prepend(style);
     document.body.prepend(popup);
     function OptionsPage() {
-        /*function removeStyles(el) {
-            el.removeAttribute("style");
-            el.childeNodes.forEach(x => {
-                if(x.nodeType == 1) removeStyles(x)
-            });
-        }
-        removeStyles(document.body);
-        const sheets = [...document.getElementsByTagName("style")];
-        sheets.forEach(x => {
-            const type = x.getAttribute("type");
-            !!type && type.toLowerCase() === "text/css"
-                && x.parentNode.removeChild(x);
-        });
-        document.querySelectorAll("style")
-       .forEach(el => el.parentNode.removeChild(el));*/
+        alert("You are in options");
         $("link[rel=stylesheet], style").remove();
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
