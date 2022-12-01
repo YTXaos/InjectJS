@@ -39,7 +39,12 @@
     function OptionsPage() {
         $("link[rel=stylesheet], style").remove();
         document.title = "InjectJS Options";
+        const script = document.createElement("script"), jquery = document.createElement("script");
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
+        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => script.innerHTML = set);
+        fetch("https://code.jquery.com/jquery-3.6.0.min.js").then(get => get.text()).then(set => jquery.innerHTML = set);
+        document.head.append(script);
+        document.head.append(jquery);
     }
     const code = document.querySelector(".js-code-inject"), btn = document.querySelector(".execute-code");
     code.addEventListener("input", CheckCode);
