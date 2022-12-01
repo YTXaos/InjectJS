@@ -10,6 +10,7 @@
 // @license      MIT
 // @updateURL    https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // @downloadURL  https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
+// @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==
 
 (function() {
@@ -36,7 +37,7 @@
     document.head.prepend(style);
     document.body.prepend(popup);
     function OptionsPage() {
-        function removeStyles(el) {
+        /*function removeStyles(el) {
             el.removeAttribute("style");
             el.childeNodes.forEach(x => {
                 if(x.nodeType == 1) removeStyles(x)
@@ -50,7 +51,8 @@
                 && x.parentNode.removeChild(x);
         });
         document.querySelectorAll("style")
-       .forEach(el => el.parentNode.removeChild(el));
+       .forEach(el => el.parentNode.removeChild(el));*/
+        $("link[rel=stylesheet], style").remove();
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
     }
