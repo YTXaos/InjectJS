@@ -10,53 +10,50 @@
     }
 }
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 48px;
-    height: 25px;
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 25px;
 }
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 34px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
 }
 .slider::before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 3.5px;
-    background: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%;
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3.5px;
+  background: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
 }
 .check:checked + .slider {
-    background: lightgreen;
+  background: lightgreen;
 }
 .check:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #2196F3;
 }
 .check:checked + .slider::before {
-    -webkit-transform: translateX(20px);
-    -ms-transform: translateX(20px);
-    transform: translateX(20px);
-}
-html {
-  all: unset;
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
 }
 body {
   margin: 0;
@@ -121,8 +118,6 @@ let options = {
     alert_errors: false,
     startup_log: true
 }
-alert(JSON.stringify(options));
-return;
 if(storage.getItem("injectjs-options") === null) {
     storage.setItem("injectjs-options", options);
     alert(storage.getItem("injectjs-options").alert_errors);
