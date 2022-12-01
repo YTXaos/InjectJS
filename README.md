@@ -8,7 +8,7 @@ Go to [Greasyfork](https://greasyfork.org/en/scripts/455718-injectjs) and downlo
 Go to your Tampermonkey dashboard and create a new script. After that copy the code from [main.js](https://github.com/YTXaos/InjectJS/blob/main/main.js).
 ### Fetching
 Go to your Tampermonkey dashboard and create a new script. Then copy this script into the script.
-```
+```js
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
