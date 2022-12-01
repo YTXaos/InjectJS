@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      1.10
+// @version      1.11
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -20,8 +20,7 @@
         return url === `${origin}${page}`;
     }
     if(onURL("/inject-js/")) {
-        alert(`If you're looking for the options go to ${origin}/inject-js/options`);
-        return;
+        location = "https://github.com/YTXaos/InjectJS";
     }
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
     const popup = document.createElement("div"), style = document.createElement("style");
@@ -42,7 +41,7 @@
         const script = document.createElement("script"), jquery = document.createElement("script");
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => script.innerHTML = set);
-        fetch("https://code.jquery.com/jquery-3.6.0.min.js").then(get => get.text()).then(set => jquery.innerHTML = set);
+        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/assets/jquery.js").then(get => get.text()).then(set => jquery.innerHTML = set);
         document.head.append(script);
         document.head.append(jquery);
     }
@@ -94,7 +93,6 @@
             pos2 = pos4 - e.clientY;
             pos3 = e.clientX;
             pos4 = e.clientY;
-            // set the element's new position:
             elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
             elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
           }
