@@ -46,7 +46,6 @@
     btn.addEventListener("click", InjectCode);
     function CheckCode() {
         const code = document.querySelector(".js-code-inject");
-        const btn = document.querySelector(".execute-code");
         if(code.value.length < 5) {
             btn.setAttribute("disabled", "disabled");
         } else {
