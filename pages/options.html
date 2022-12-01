@@ -92,7 +92,6 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: 70%;
     gap: 5px;
   }
   .option {
@@ -105,6 +104,26 @@
     font-family: Arial;
     color: #212529;
   }
+  @media only screen and (min-width: 767px) and (max-width: 1024px) {
+
+  }
+  @media only screen and (max-width: 767px) {
+    .injectjs-options {
+      width: 40%;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .injectjs-options {
+      border: none;
+      border-radius: .25rem;
+    }
+    .option-label {
+      color: #e3e1e1;
+    }
+    .js-header {
+      color: white;
+    }
+  }
 </style>
 <div class="injectjs-options">
   <label class="js-header">Inject<span class="js-logo">JS</span></label>
@@ -115,7 +134,7 @@
     </div>
     <div class="option">
       <span class="option-label">Startup Log</span> <label class="switch"><input type="checkbox" class="check"
-          option-id="startup_log"><span class="slider"></span></label>
+          option-id="startup_log" checked><span class="slider"></span></label>
     </div>
   </div>
 </div>
