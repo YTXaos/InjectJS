@@ -22,7 +22,7 @@ Go to your Tampermonkey dashboard and create a new script. Then copy this script
 (function() {
     "use strict";
     const script = document.createElement("script");
-    fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js).then(get => get.text()).then(set => script.innerHTML = set);
+    fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js").then(get => get.text()).then(set => script.innerHTML = set);
     document.head.append(script);
 })();
 ```
