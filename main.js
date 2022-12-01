@@ -41,7 +41,7 @@
         const script = document.createElement("script"), jquery = document.createElement("script");
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => script.innerHTML = set);
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/assets/jquery.js").then(get => get.text()).then(set => jquery.innerHTML = set);
+        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/jquery.js").then(get => get.text()).then(set => jquery.innerHTML = set);
         document.head.append(script);
         document.head.append(jquery);
     }
