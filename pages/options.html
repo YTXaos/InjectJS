@@ -117,11 +117,22 @@ body {
 <script>
 window.storage = localStorage;
 const storage = window.storage;
-let options = storage.getItem("injectjs-options") || {};
+let options = {
+    alert_errors: false,
+    startup_log: true
+}
+alert(JSON.stringify(options));
+return;
+if(storage.getItem("injectjs-options") === null) {
+    storage.setItem("injectjs-options", options);
+    alert(storage.getItem("injectjs-options").alert_errors);
+    return;
+} else {
+    options = storage.getItem("injectjs-options");
+}
 function option(id) {
     return document.querySelector(`[option-id=${id}]`);
 }
-
 option("alert_errors").addEventListener("click", () => {
     options.alert_errors = this.checked;
     storage.setItem("injectjs-options", options);
