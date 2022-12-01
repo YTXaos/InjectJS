@@ -1,142 +1,175 @@
 <style>
-:root {
-  --background-1: #f7f7f7;
-  --background-2: #fff;
-}
-@media (prefers-color-scheme: dark) {
+  :root {
+    --background-1: #f7f7f7;
+    --background-2: #fff;
+  }
+  @media (prefers-color-scheme: dark) {
     :root {
       --background-1: #2d2d2d;
       --background-2: #2e2e2e;
     }
-}
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 25px;
-}
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 34px;
-}
-.slider::before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 20px;
-  left: 4px;
-  bottom: 3.5px;
-  background: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 50%;
-}
-.check:checked + .slider {
-  background: lightgreen;
-}
-.check:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-.check:checked + .slider::before {
-  -webkit-transform: translateX(20px);
-  -ms-transform: translateX(20px);
-  transform: translateX(20px);
-}
-html {
-  margin: 0;
-  padding: 0;
-}
-body {
-  margin: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-  padding: 1em;
-  width: 100vw;
-  height: 100vh;
-  background: var(--background-1);
-}
-.injectjs-options {
-  border: 1px solid #e3e1e1;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.035), 0 2px 4px rgba(0,0,0,0.035), 0 4px 8px rgba(0,0,0,0.035), 0 8px 16px rgba(0,0,0,0.035), 0 16px 32px rgba(0,0,0,0.035), 0 32px 64px rgba(0,0,0,0.035);
-  width: 20%;
-  background: var(--background-2);
-  padding: 0.5em;
-  box-sizing: border-box;
-  position: relative;
-}
-.js-header {
-  display: block;
-  font-size: 1.3rem;
-  text-align: center;
-  font-family: "Open Sans", sans-serif;
-  margin-bottom: 0.5rem;
-}
-.js-logo {
-  color: gold;
-}
-.option-section {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  width: 70%;
-  gap: 5px;
-}
-.option {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-.option-label {
-  font-family: Arial;
-}
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 25px;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  .slider::before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 3.5px;
+    background: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  .check:checked+.slider {
+    background: lightgreen;
+  }
+  .check:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  .check:checked+.slider::before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  html {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1em;
+    width: 100vw;
+    height: 100vh;
+    background: var(--background-1);
+  }
+  .injectjs-options {
+    border: 1px solid #e3e1e1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.035), 0 2px 4px rgba(0, 0, 0, 0.035), 0 4px 8px rgba(0, 0, 0, 0.035), 0 8px 16px rgba(0, 0, 0, 0.035), 0 16px 32px rgba(0, 0, 0, 0.035), 0 32px 64px rgba(0, 0, 0, 0.035);
+    width: 20%;
+    background: var(--background-2);
+    padding: 0.5em;
+    box-sizing: border-box;
+    position: fixed;
+  }
+  .js-header {
+    display: block;
+    font-size: 1.3rem;
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 0.5rem;
+    color: black;
+  }
+  .js-logo {
+    color: gold;
+  }
+  .option-section {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 70%;
+    gap: 5px;
+  }
+  .option {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .option-label {
+    font-family: Arial;
+    color: #212529;
+  }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="injectjs-options">
-    <label class="js-header">Inject<span class="js-logo">JS</span></label>
-    <div class="option-section">
-        <div class="option">
-            <span class="option-label">Alert Errors</span> <label class="switch"><input type="checkbox" class="check" option-id="alert_errors"><span class="slider"></span></label>
-        </div>
-        <div class="option">
-            <span class="option-label">Startup Log</span> <label class="switch"><input type="checkbox" class="check" option-id="startup_log"><span class="slider"></span></label>
-        </div>
+  <label class="js-header">Inject<span class="js-logo">JS</span></label>
+  <div class="option-section">
+    <div class="option">
+      <span class="option-label">Alert Errors</span> <label class="switch"><input type="checkbox" class="check"
+          option-id="alert_errors"><span class="slider"></span></label>
     </div>
+    <div class="option">
+      <span class="option-label">Startup Log</span> <label class="switch"><input type="checkbox" class="check"
+          option-id="startup_log"><span class="slider"></span></label>
+    </div>
+  </div>
 </div>
 <script>
-window.storage = localStorage;
-const storage = window.storage;
-let options = {
-    alert_errors: false,
-    startup_log: true
-}
-if(storage.getItem("injectjs-options") === null) {
-    storage.setItem("injectjs-options", options);
-    alert(storage.getItem("injectjs-options").alert_errors);
-    return;
-} else {
-    options = storage.getItem("injectjs-options");
-}
-function option(id) {
+  window.storage = localStorage;
+  const storage = window.storage;
+  function option(id) {
     return document.querySelector(`[option-id=${id}]`);
-}
-option("alert_errors").addEventListener("click", () => {
-    options.alert_errors = this.checked;
-    storage.setItem("injectjs-options", options);
-});
-option("startup_log").addEventListener("click", () => {
-    options.startup_log = this.checked;
-});
+  }
+  const options = document.querySelectorAll("[option-id]");
+  options.forEach(elm => {
+    const attr = "inject-js:"+elm.getAttribute("option-id");
+    if(storage.getItem(attr) !== null) {
+      if(storage.getItem(attr).toString() == "true") {
+        $(elm).attr("checked", "checked");
+      }
+    }
+  });
+  options.forEach(elm => {
+    elm.addEventListener("click", function () {
+      storage.setItem("inject-js:"+this.getAttribute("option-id"), this.checked);
+    });
+  });
+  dragElement(document.querySelector(".injectjs-options"));
+  function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.querySelector(".js-header")) {
+      document.querySelector(".js-header").onmousedown = dragMouseDown;
+    } else {
+      elmnt.onmousedown = dragMouseDown;
+    }
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+    }
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      // set the element's new position:
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+    function closeDragElement() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
 </script>
