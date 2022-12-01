@@ -36,7 +36,7 @@
     document.head.prepend(style);
     document.body.prepend(popup);
     function OptionsPage() {
-        document.querySelectorAll("link, style").forEach(elm => {
+        document.querySelectorAll("style").forEach(elm => {
             if(document.querySelector(elm)) {
                 document.querySelector(elm).remove();
             }
