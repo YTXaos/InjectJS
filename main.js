@@ -23,7 +23,7 @@
         return;
     }
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
-    const options = JSON.parse(localStorage.getItem("injectjs-options")), popup = document.createElement("div"), style = document.createElement("style");
+    const popup = document.createElement("div"), style = document.createElement("style");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
     popup.setAttribute("style", "display: none;");
@@ -36,8 +36,11 @@
     document.head.prepend(style);
     document.body.prepend(popup);
     function OptionsPage() {
-        document.querySelector("link") !== null && (document.querySelector("link").remove());
-        document.querySelector("style") !== null && (document.querySelector("style").remove());
+        document.querySelectorAll("link, style").forEach(elm => {
+            if(document.querySelector(elm)) {
+                document.querySelector(elm).remove();
+            }
+        });
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
     }
