@@ -37,7 +37,6 @@
     document.head.prepend(style);
     document.body.prepend(popup);
     function OptionsPage() {
-        alert("You are in options");
         $("link[rel=stylesheet], style").remove();
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
