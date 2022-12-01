@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      1.07
+// @version      1.08
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -15,8 +15,12 @@
 (function() {
     "use strict";
     const url = location.href, origin = location.origin;
-    function onURL(href, page) {
-        return url === `${href}${page}`;
+    function onURL(page) {
+        return url === `${origin}${page}`;
+    }
+    if(onURL("/inject-js/")) {
+        alert(`If you're looking for the options go to ${origin}/inject-js/options`);
+        return;
     }
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
     const options = JSON.parse(localStorage.getItem("injectjs-options")), popup = document.createElement("div"), style = document.createElement("style");
@@ -32,8 +36,8 @@
     document.head.prepend(style);
     document.body.prepend(popup);
     function OptionsPage() {
-        document.querySelector("link") && (document.querySelector("link").remove());
-        document.querySelector("style") && (document.querySelector("style").remove());
+        document.querySelector("link") !== null && (document.querySelector("link").remove());
+        document.querySelector("style") !== null && (document.querySelector("style").remove());
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
     }
@@ -97,7 +101,7 @@
         }
         popup.classList.toggle("show");
     }
-    if(onURL(origin, "/inject-js/options")) {
+    if(onURL("/inject-js/options")) {
         OptionsPage();
     }
     document.addEventListener("keyup", function(e) {
