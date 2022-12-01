@@ -5,7 +5,7 @@ First, you need to have the [Tampermonkey extension](https://chrome.google.com/w
 ### Greasyfork
 Go to [Greasyfork](https://greasyfork.org/en/scripts/455718-injectjs) and download the script. This should automatically install it and it should be ready.
 ### Manual
-Go to your Tampermonkey dashboard and create a new script. After that copy the code from [main.js](https://github.com/YTXaos/InjectJS/blob/main/main.js).
+Go to your Tampermonkey dashboard and create a new script. After that copy the code from [main.js](https://github.com/YTXaos/InjectJS/blob/main/main.js). However, you will need to manually update this script.
 ### Fetching
 Go to your Tampermonkey dashboard and create a new script. Then copy this script into the script.
 ```js
