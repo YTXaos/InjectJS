@@ -8,7 +8,7 @@ options.forEach(elm => {
   const attr = "inject-js:"+elm.getAttribute("option-id");
   if(storage.getItem(attr) !== null) {
     if(storage.getItem(attr).toString() == "true") {
-      $(elm).attr("checked", "checked");
+      elm.setAttribute("checked", "checked");
     }
   }
 });
