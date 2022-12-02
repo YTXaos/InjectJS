@@ -15,15 +15,26 @@
 
 (function() {
     "use strict";
-    const url = location.href, origin = location.origin;
-    function onURL(page) {
-        return url === `${origin}${page}`;
+    const url = location.href,
+        origin = location.origin,
+        storage = localStorage;
+
+    function onURL(page, mode) {
+        switch(mode) {
+            case "exact":
+                return url === `${origin}${page}`;
+            case "relative":
+                return url.includes(page);
+            default:
+                console.error("InjectJS: Specify a matching mode.");
+        }
     }
-    if(onURL("/inject-js/")) {
+    if(onURL("/inject-js/", "relative")) {
         location = "https://github.com/YTXaos/InjectJS";
     }
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
-    const popup = document.createElement("div"), style = document.createElement("style");
+    const popup = document.createElement("div"),
+        style = document.createElement("style");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
     popup.setAttribute("style", "display: none;");
@@ -35,15 +46,20 @@
     <button class="execute-code" disabled>Execute</button>`;
     document.head.prepend(style);
     document.body.prepend(popup);
+
     function OptionsPage() {
         $("link[rel=stylesheet], style").remove();
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => GM_addElement(document.body, "script", { textContent: set }));
+        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => GM_addElement(document.body, "script", {
+            textContent: set
+        }));
     }
-    const code = document.querySelector(".js-code-inject"), btn = document.querySelector(".execute-code");
+    const code = document.querySelector(".js-code-inject"),
+        btn = document.querySelector(".execute-code");
     code.addEventListener("input", CheckCode);
     btn.addEventListener("click", InjectCode);
+
     function CheckCode() {
         const code = document.querySelector(".js-code-inject");
         if(code.value.length < 5) {
@@ -52,12 +68,13 @@
             btn.removeAttribute("disabled");
         }
     }
+
     function InjectCode() {
         const code = document.querySelector(".js-code-inject").value;
         const show_alerts = false;
         try {
             eval(code);
-        } catch(e) {
+        } catch (e) {
             if(show_alerts) {
                 alert(e.message);
             } else {
@@ -65,41 +82,48 @@
             }
         }
     }
+    
     function ShowInjector(event) {
         dragElement(document.querySelector(".js-injector-popup"));
         function dragElement(elmnt) {
-          var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-          if (document.querySelector(".js-inject-header")) {
-            document.querySelector(".js-inject-header").onmousedown = dragMouseDown;
-          } else {
-            elmnt.onmousedown = dragMouseDown;
-          }
-          function dragMouseDown(e) {
-            e = e || window.event;
-            e.preventDefault();
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-          }
-          function elementDrag(e) {
-            e = e || window.event;
-            e.preventDefault();
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-          }
-          function closeDragElement() {
-            document.onmouseup = null;
-            document.onmousemove = null;
-          }
+            var pos1 = 0,
+                pos2 = 0,
+                pos3 = 0,
+                pos4 = 0;
+            if(document.querySelector(".js-inject-header")) {
+                document.querySelector(".js-inject-header").onmousedown = dragMouseDown;
+            } else {
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
         }
         popup.classList.toggle("show");
     }
-    if(onURL("/inject-js/options")) {
+    if(onURL("/inject-js/options", "relative")) {
         OptionsPage();
     }
     document.addEventListener("keyup", function(e) {
@@ -107,5 +131,5 @@
         if(e.ctrlKey && e.which === 81) {
             ShowInjector();
         }
-   });
+    });
 })();
