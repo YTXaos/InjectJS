@@ -1,15 +1,15 @@
 // ==UserScript==
-// @name         InjectJS
+// @name         InjectJS Tests
 // @namespace    http://tampermonkey.net/
-// @version      1.12
+// @version      1.13
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
 // @icon         https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logo.png
-// @grant        none
+// @grant        GM_addElement
 // @license      MIT
-// @updateURL    https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // @downloadURL  https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
+// @updateURL    https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==
 
@@ -38,12 +38,11 @@
     function OptionsPage() {
         $("link[rel=stylesheet], style").remove();
         document.title = "InjectJS Options";
-        const script = document.createElement("script"), jquery = document.createElement("script");
+        /*const script = document.createElement("script"), jquery = document.createElement("script");*/
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => script.innerHTML = set);
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/jquery.js").then(get => get.text()).then(set => jquery.innerHTML = set);
-        document.head.append(script);
-        document.head.append(jquery);
+        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => GM_addElement(document.body, "script", { textContent: set }));
+        /*document.head.append(script);
+        document.head.append(jquery);*/
     }
     const code = document.querySelector(".js-code-inject"), btn = document.querySelector(".execute-code");
     code.addEventListener("input", CheckCode);
