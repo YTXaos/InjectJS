@@ -17,8 +17,11 @@
     "use strict";
     const url = location.href,
         origin = location.origin,
-        storage = localStorage;
-
+        storage = localStorage,
+        local_options = ["inject-js:show_alerts", "inject-js:startup_log"];
+    local_options.forEach(opt => {
+        let options = JSON.stringify(storage.getItem(opt));
+    })
     function onURL(page, mode) {
         switch(mode) {
             case "exact":
@@ -71,11 +74,10 @@
 
     function InjectCode() {
         const code = document.querySelector(".js-code-inject").value;
-        const show_alerts = false;
         try {
             eval(code);
         } catch (e) {
-            if(show_alerts) {
+            if(options.show_alerts) {
                 alert(e.message);
             } else {
                 console.error(e.message);
