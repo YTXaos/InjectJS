@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://github.com/YTXaos/InjectJS
-// @version      1.16
+// @version      1.17
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -32,7 +32,7 @@
                 console.error("InjectJS: Specify a matching mode.");
         }
     }
-    if(onURL("/inject-js/", "relative")) {
+    if(onURL("/inject-js/", "exact")) {
         location = "https://github.com/YTXaos/InjectJS";
     }
     console.info("InjectJS Loaded. Press Ctrl + Q to topen");
@@ -54,7 +54,7 @@
         $("link[rel=stylesheet], style").remove();
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => GM_addElement(document.body, "script", {
+        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => GM_addElement(document.head, "script", {
             textContent: set
         }));
     }
@@ -84,7 +84,7 @@
             }
         }
     }
-    
+
     function ShowInjector() {
         dragElement(document.querySelector(".js-injector-popup"));
         function dragElement(elmnt) {
@@ -130,7 +130,7 @@
     }
     document.addEventListener("keyup", function(e) {
         e.preventDefault();
-        if(e.ctrlKey && e.key == "KeyQ") {
+        if(e.ctrlKey && e.which === 81) {
             ShowInjector();
         }
     });
