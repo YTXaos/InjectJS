@@ -123,7 +123,7 @@
         }
         popup.classList.toggle("show");
     }
-    if(onURL("/inject-js/options", "relative")) {
+    if(onURL("/inject-js/options", "exact")) {
         OptionsPage();
     }
     document.addEventListener("keyup", function(e) {
