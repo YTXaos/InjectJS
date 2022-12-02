@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         InjectJS Tests
+// @name         InjectJS
 // @namespace    http://tampermonkey.net/
-// @version      1.13
+// @version      1.14
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
