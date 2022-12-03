@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://github.com/YTXaos/InjectJS
-// @version      1.19
+// @version      1.20
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -37,7 +37,7 @@
     if(onURL("/inject-js/", "exact")) {
         location = "https://github.com/YTXaos/InjectJS";
     }
-    console.info("InjectJS Loaded. Press Ctrl + Q to topen");
+    Option("startup_log") == "true" && (console.info("InjectJS Loaded. Press Ctrl + Q to topen"));
     const popup = document.createElement("div"),
         style = document.createElement("style");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
