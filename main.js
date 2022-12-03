@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://github.com/YTXaos/InjectJS
-// @version      1.17
+// @version      1.18
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -20,7 +20,7 @@
         storage = localStorage,
         local_options = ["inject-js:show_alerts", "inject-js:startup_log"];
     local_options.forEach(opt => {
-        let options = JSON.stringify(storage.getItem(opt));
+        window.JSoptions = JSON.stringify(storage.getItem(opt));
     });
     function onURL(page, mode) {
         switch(mode) {
@@ -41,11 +41,10 @@
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
-    popup.innerHTML = `
-    <label class="js-inject-header">
+    popup.innerHTML = `<label class="js-inject-header">
     <div class="js-logo-needle">.....</div>
     Inject<span class="js-logo">JS</span></label>
-    <textarea placeholder="Your code here" class="js-code-inject" spellcheck="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
+    <textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
     <button class="execute-code" disabled>Execute</button>`;
     document.head.prepend(style);
     document.body.prepend(popup);
@@ -77,7 +76,7 @@
         try {
             eval(code);
         } catch (e) {
-            if(options.show_alerts) {
+            if(window.JSoptions.show_alerts) {
                 alert(e.message);
             } else {
                 console.error(e.message);

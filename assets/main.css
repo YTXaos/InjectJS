@@ -1,8 +1,3 @@
-@font-face {
-  font-family: "Consola";
-  src: url(https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/CONSOLA.TTF),
-   url(https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/CONSOLA.woff);
-}
 .js-injector-popup {
   position: fixed;
   z-index: 9999;
@@ -41,7 +36,6 @@
   box-sizing: border-box;
   padding: 0.3em;
   background: inherit;
-  color: white;
   border-radius: 0.25rem;
   outline: none;
   transition: box-shadow .15s ease-in-out;
@@ -84,4 +78,9 @@
 }
 .js-injector-popup.show {
   display: block !important;
+}
+@media (prefers-color-scheme: dark) {
+    .js-code-inject {
+        color: white;
+    }
 }
