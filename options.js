@@ -1,5 +1,12 @@
 window.storage = localStorage;
 const storage = window.storage;
+console.error = function(err) {
+  if(err.includes("onmousedown")) {
+    alert("Please reload this page.");
+  } else {
+    console.warn("ERROR: "+err);
+  }
+}
 function option(id) {
   return document.querySelector(`[option-id=${id}]`);
 }
