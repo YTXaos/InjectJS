@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Consola";
+  src: url(https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/CONSOLA.TTF),
+   url(https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/CONSOLA.woff);
+}
 .js-injector-popup {
   position: fixed;
   z-index: 9999;

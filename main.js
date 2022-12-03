@@ -21,7 +21,7 @@
         local_options = ["inject-js:show_alerts", "inject-js:startup_log"];
     local_options.forEach(opt => {
         let options = JSON.stringify(storage.getItem(opt));
-    })
+    });
     function onURL(page, mode) {
         switch(mode) {
             case "exact":
