@@ -1,7 +1,7 @@
 window.storage = localStorage;
 const storage = window.storage;
 console.error = function(err) {
-  if(err.includes("onmousedown")) {
+  if(err.includes("onmousedown") || err.includes("properties of null")) {
     alert("Please reload this page.");
   } else {
     console.warn("ERROR: "+err);
