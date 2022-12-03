@@ -34,7 +34,7 @@
 .js-code-inject {
   resize: both !important;
   box-sizing: border-box;
-  padding: 0.3em;
+  padding: 0.4em;
   background: inherit;
   border-radius: 0.25rem;
   outline: none;
@@ -43,9 +43,15 @@
   display: block;
   height: 7rem;
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 .js-code-inject:focus {
   box-shadow: 0 0 0 3px rgb(0 123 255 / 57%);
+}
+.js-btns-section {
+  display: flex;
+  gap: 5px;
+  width: 100%;
 }
 .execute-code {
   all: revert;
@@ -62,7 +68,7 @@
   font-size: 1rem;
   position: relative;
   outline: none;
-  width: 100%;
+  width: 60%;
   box-sizing: border-box;
 }
 .execute-code:disabled {
@@ -70,12 +76,28 @@
   color: white;
   pointer-events: none;
 }
-.execute-code:hover {
-  background: #e5d11d;
+.execute-code:hover {background: #e5d11d;}
+.execute-code:active {background: #b1a00c;}
+.js-options-btn {
+  all: revert;
+  background: #33ef4a;
+  border: none;
+  color: white;
+  padding: 0.3em 0.4em;
+  cursor: pointer;
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  position: relative;
+  outline: none;
+  width: 40%;
+  box-sizing: border-box;
 }
-.execute-code:active {
-  background: #b1a00c;
-}
+.js-options-btn:hover {background: #1adb30;}
+.js-options-btn:active {background: #0eac20}
 .js-injector-popup.show {
   display: block !important;
 }

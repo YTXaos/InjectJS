@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://github.com/YTXaos/InjectJS
-// @version      1.18
+// @version      1.19
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
@@ -16,12 +16,14 @@
 (function() {
     "use strict";
     const url = location.href,
-        origin = location.origin,
-        storage = localStorage,
-        local_options = ["inject-js:show_alerts", "inject-js:startup_log"];
-    local_options.forEach(opt => {
-        window.JSoptions = JSON.stringify(storage.getItem(opt));
-    });
+        origin = location.origin;
+    function Option(item) {
+        if(localStorage.getItem(`inject-js:${item}`)) {
+            return localStorage.getItem(`inject-js:${item}`).toString();
+        } else {
+            return false;
+        }
+    }
     function onURL(page, mode) {
         switch(mode) {
             case "exact":
@@ -42,10 +44,14 @@
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
     popup.innerHTML = `<label class="js-inject-header">
-    <div class="js-logo-needle">.....</div>
-    Inject<span class="js-logo">JS</span></label>
-    <textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
-    <button class="execute-code" disabled>Execute</button>`;
+            <div class="js-logo-needle">.....</div>
+            Inject<span class="js-logo">JS</span>
+        </label>
+        <textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
+    <div class="js-btns-section">
+        <button class="execute-code" disabled>Execute</button>
+        <button class="js-options-btn">Options</button>
+    </div>`;
     document.head.prepend(style);
     document.body.prepend(popup);
 
@@ -58,9 +64,10 @@
         }));
     }
     const code = document.querySelector(".js-code-inject"),
-        btn = document.querySelector(".execute-code");
+        btn = document.querySelector(".execute-code"), option_btn = document.querySelector(".js-options-btn");
     code.addEventListener("input", CheckCode);
     btn.addEventListener("click", InjectCode);
+    option_btn.addEventListener("click", () => { location = "/inject-js/options"; });
 
     function CheckCode() {
         const code = document.querySelector(".js-code-inject");
@@ -76,7 +83,7 @@
         try {
             eval(code);
         } catch (e) {
-            if(window.JSoptions.show_alerts) {
+            if(Option("alert_errors") == "true") {
                 alert(e.message);
             } else {
                 console.error(e.message);
