@@ -104,8 +104,24 @@
     font-family: Arial;
     color: #212529;
   }
-  @media only screen and (min-width: 767px) and (max-width: 1024px) {
-
+  .return-form {
+    padding: 0.3em 0.5em;
+    border-radius: 0.25rem;
+    outline: none;
+    border: none;
+    background: #f8e12e;
+    cursor: pointer;
+    color: white;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-top: 0.5rem;
+  }
+  .return-form:hover {
+    background: #bfae1d;
+  }
+  .return-form:active {
+    background: #a8990b;
   }
   @media only screen and (max-width: 767px) {
     .injectjs-options {
@@ -137,4 +153,5 @@
           option-id="startup_log" checked><span class="slider"></span></label>
     </div>
   </div>
+  <button class="return-form">Done</button>
 </div>

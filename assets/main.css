@@ -76,8 +76,8 @@
   color: white;
   pointer-events: none;
 }
-.execute-code:hover {background: #e5d11d;}
-.execute-code:active {background: #b1a00c;}
+.execute-code:hover {background: #bfae1d;}
+.execute-code:active {background: #a8990b;}
 .js-options-btn {
   all: revert;
   background: #33ef4a;

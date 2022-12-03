@@ -24,6 +24,9 @@ options.forEach(elm => {
     storage.setItem("inject-js:"+this.getAttribute("option-id"), this.checked);
   });
 });
+document.querySelector(".return-form").addEventListener("click", function() {
+  history.go(-1);
+});
 dragElement(document.querySelector(".injectjs-options"));
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
