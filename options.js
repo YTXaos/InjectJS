@@ -18,6 +18,11 @@ options.forEach(elm => {
       elm.setAttribute("checked", "checked");
     }
   }
+  if(elm.checked) {
+    storage.setItem(attr, true);
+  } else {
+    storage.setItem(attr, false);
+  }
 });
 options.forEach(elm => {
   elm.addEventListener("click", function () {
