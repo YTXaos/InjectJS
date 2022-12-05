@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://github.com/YTXaos/InjectJS
-// @version      1.21
+// @version      1.22
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
+// @match        file:///*
 // @icon         https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logo.png
 // @grant        GM_addElement
 // @license      MIT
@@ -40,7 +41,6 @@
     Option("startup_log") == "true" && (console.info("InjectJS Loaded. Press Ctrl + Q to topen"));
     const popup = document.createElement("div"),
         style = document.createElement("style");
-    // fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/src/ace.js").then(get => get.text()).then(set => GM_addElement(document.head, "script", { textContent: set }));
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
@@ -170,7 +170,7 @@
     }
     document.addEventListener("keyup", function(e) {
         e.preventDefault();
-        if(e.ctrlKey && e.which === 81) {
+        if(e.ctrlKey && e.key === "q") {
             ShowInjector();
         }
     });
