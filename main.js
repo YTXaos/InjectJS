@@ -35,6 +35,15 @@
                 console.error("InjectJS: Specify a matching mode.");
         }
     }
+    if(Option("disable") == "true") {
+        document.addEventListener("keyup", function(e) {
+            e.preventDefault();
+            if(e.ctrlKey && e.shiftKey && e.key === "y") {
+                location = "/inject-js/options";
+            }
+        });
+        return;
+    }
     if(onURL("/inject-js/", "exact")) {
         location = "https://github.com/YTXaos/InjectJS";
     }
