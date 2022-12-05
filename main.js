@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InjectJS
 // @namespace    http://github.com/YTXaos/InjectJS
-// @version      1.20
+// @version      1.21
 // @description  Inject javascript into almost every website you visit.
 // @author       YTXaos
 // @match        *://*/*
