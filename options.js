@@ -1,14 +1,10 @@
-window.storage = localStorage;
-const storage = window.storage;
+const storage = localStorage;
 console.error = function(err) {
   if(err.includes("onmousedown") || err.includes("properties of null")) {
     alert("Please reload this page.");
   } else {
     console.warn("ERROR: "+err);
   }
-}
-function option(id) {
-  return document.querySelector(`[option-id=${id}]`);
 }
 const options = document.querySelectorAll("[option-id]");
 options.forEach(elm => {
@@ -50,7 +46,6 @@ function dragElement(elmnt) {
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
-    // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
