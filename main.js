@@ -38,8 +38,12 @@
         location = "https://github.com/YTXaos/InjectJS";
     }
     Option("startup_log") == "true" && (console.info("InjectJS Loaded. Press Ctrl + Q to topen"));
+    function Main() {
+        var editor = ace.editor("js-code-inject");
+    }
     const popup = document.createElement("div"),
         style = document.createElement("style");
+    fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/src/ace.js").then(get => get.text()).then(set => GM_addElement(document.head, "script", { textContent: set }));
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
@@ -47,16 +51,16 @@
             <div class="js-logo-needle">.....</div>
             Inject<span class="js-logo">JS</span>
         </label>
-        <textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
+        <textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" id="js-code-inject"></textarea>
     <div class="js-btns-section">
         <button class="execute-code" disabled>Execute</button>
         <button class="js-options-btn">Options</button>
     </div>`;
     document.head.prepend(style);
     document.body.prepend(popup);
-
+    Main();
     function OptionsPage() {
-        $("link[rel=stylesheet], style").remove();
+        $("link[rel=stylesheet], style, script").remove();
         document.title = "InjectJS Options";
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
         fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => GM_addElement(document.head, "script", {
