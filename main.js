@@ -38,12 +38,9 @@
         location = "https://github.com/YTXaos/InjectJS";
     }
     Option("startup_log") == "true" && (console.info("InjectJS Loaded. Press Ctrl + Q to topen"));
-    function Main() {
-        var editor = ace.editor("js-code-inject");
-    }
     const popup = document.createElement("div"),
         style = document.createElement("style");
-    fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/src/ace.js").then(get => get.text()).then(set => GM_addElement(document.head, "script", { textContent: set }));
+    // fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/src/ace.js").then(get => get.text()).then(set => GM_addElement(document.head, "script", { textContent: set }));
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
@@ -58,7 +55,7 @@
     </div>`;
     document.head.prepend(style);
     document.body.prepend(popup);
-    Main();
+
     function OptionsPage() {
         $("link[rel=stylesheet], style, script").remove();
         document.title = "InjectJS Options";
@@ -70,9 +67,42 @@
     const code = document.querySelector(".js-code-inject"),
         btn = document.querySelector(".execute-code"), option_btn = document.querySelector(".js-options-btn");
     code.addEventListener("input", CheckCode);
+    code.addEventListener("keydown", Syntax);
     btn.addEventListener("click", InjectCode);
     option_btn.addEventListener("click", () => { location = "/inject-js/options"; });
 
+    function Syntax(e) {
+        if(e.which === 219) {
+            e.preventDefault();
+            const start = code.selectionStart,
+              end = code.selectionEnd,
+              selection = code.value.substring(start, end),
+              replace = `${code.value.substring(0, start)}{\n${selection}\n}${code.value.substring(end)}`;
+            code.value = replace;
+            code.focus();
+            code.selectionEnd = end + 2;
+          }
+          if(e.which === 57) {
+            e.preventDefault();
+            const start = code.selectionStart,
+              end = code.selectionEnd,
+              selection = code.value.substring(start, end),
+              replace = `${code.value.substring(0, start)}(${selection})${code.value.substring(end)}`;
+            code.value = replace;
+            code.focus();
+            code.selectionEnd = end + 1;
+          }
+          if(e.which === 222) {
+            e.preventDefault();
+            const start = code.selectionStart,
+              end = code.selectionEnd,
+              selection = code.value.substring(start, end),
+              replace = `${code.value.substring(0, start)}${e.key}${selection}${e.key}${code.value.substring(end)}`;
+            code.value = replace;
+            code.focus();
+            code.selectionEnd = end + 1;
+          }
+    }
     function CheckCode() {
         const code = document.querySelector(".js-code-inject");
         if(code.value.length < 5) {
