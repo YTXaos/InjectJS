@@ -123,6 +123,12 @@
   .return-form:active {
     background: #a8990b;
   }
+  [option-label]::before {
+    content: attr(option-label);
+  }
+  [element-label]::before {
+    content: attr(element-label);
+  }
   @media only screen and (max-width: 767px) {
     .injectjs-options {
       width: 40%;
@@ -142,18 +148,18 @@
   }
 </style>
 <div class="injectjs-options">
-  <label class="js-header">Inject<span class="js-logo">JS</span></label>
+  <label class="js-header" element-label="Inject"><span class="js-logo" element-label="JS"></span></label>
   <div class="option-section">
     <div class="option">
-      <span class="option-label">Alert Errors</span> <label class="switch"><input type="checkbox" class="check"
+      <span class="option-label" option-label="Alert Errors"></span> <label class="switch"><input type="checkbox" class="check"
           option-id="alert_errors"><span class="slider"></span></label>
     </div>
     <div class="option">
-      <span class="option-label">Startup Log</span> <label class="switch"><input type="checkbox" class="check"
+      <span class="option-label" option-label="Startup Log"></span> <label class="switch"><input type="checkbox" class="check"
           option-id="startup_log"><span class="slider"></span></label>
     </div>
     <div class="option">
-      <span class="option-label">Disable InjectJS</span> <label class="switch"><input type="checkbox" class="check" option-id="disable"><span class="slider"></span></label>
+      <span class="option-label" option-label="Disable InjectJS"></span> <label class="switch"><input type="checkbox" class="check" option-id="disable"><span class="slider"></span></label>
     </div>
   </div>
   <button class="return-form">Done</button>
