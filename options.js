@@ -21,7 +21,11 @@ options.forEach(elm => {
   });
 });
 document.querySelector(".return-form").addEventListener("click", function() {
-  history.go(-1);
+  if(document.referrer === "") {
+    location = location.origin;
+  } else {
+    history.go(-1);
+  }
 });
 dragElement(document.querySelector(".injectjs-options"));
 function dragElement(elmnt) {
