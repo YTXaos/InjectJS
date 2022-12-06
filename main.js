@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name             InjectJS
 // @namespace        http://github.com/YTXaos/InjectJS
-// @version          1.22
+// @version          1.23
 // @description      Inject Javascript into almost any website.
 // @description:es   Inyecte Javascript en casi cualquier sitio web
 // @description:fr   Injectez Javascript dans presque tous les sites Web
 // @description:de   Fügen Sie Javascript in fast jede Website ein
-// @description:ja   ほぼすべての Web サイトに ジャバスクリと を挿入する
+// @description:ja   ほぼすべてのウェブサイトにジャバスクリとを挿入する
 // @description:la   Javascript in inject paene omnem website
 // @description:ru   Внедрите Javascript практически в любой веб-сайт
 // @author           YTXaos
