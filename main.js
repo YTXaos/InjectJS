@@ -44,7 +44,7 @@
     if(Option("disable") == "true") {
         document.addEventListener("keyup", function(e) {
             e.preventDefault();
-            if(e.ctrlKey && e.shiftKey && e.key === "y") {
+            if(e.ctrlKey && e.key === "q") {
                 location = "/inject-js/options";
             }
         });
@@ -135,7 +135,7 @@
             if(Option("alert_errors") == "true") {
                 alert(e.message);
             } else {
-                console.error(e.message);
+                console.error(`InjectJS: ${e.message}`);
             }
         }
     }
