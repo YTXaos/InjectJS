@@ -82,7 +82,7 @@
     const code = document.querySelector(".js-code-inject"),
         btn = document.querySelector(".execute-code"), option_btn = document.querySelector(".js-options-btn");
     code.addEventListener("input", CheckCode);
-    code.addEventListener("keydown", Syntax);
+    if(Option("syntax") != "false") { code.addEventListener("keydown", Syntax); }
     btn.addEventListener("click", InjectCode);
     option_btn.addEventListener("click", () => { location = "/inject-js/options"; });
 
