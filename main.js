@@ -87,7 +87,7 @@
     option_btn.addEventListener("click", () => { location = "/inject-js/options"; });
 
     function Syntax(e) {
-        if(e.which === 219) {
+        if(e.key === "{") {
             e.preventDefault();
             const start = code.selectionStart,
               end = code.selectionEnd,
@@ -97,7 +97,7 @@
             code.focus();
             code.selectionEnd = end + 2;
           }
-          if(e.which === 57) {
+          if(e.key === "(") {
             e.preventDefault();
             const start = code.selectionStart,
               end = code.selectionEnd,
