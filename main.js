@@ -24,6 +24,10 @@
     "use strict";
     const url = location.href,
         origin = location.origin;
+    /**
+     * @param {string} item Specify what item to look for in the options.
+     * @returns {string} True or false if found, false boolean if not.
+     */
     function Option(item) {
         if(localStorage.getItem(`inject-js:${item}`)) {
             return localStorage.getItem(`inject-js:${item}`).toString();
@@ -31,14 +35,17 @@
             return false;
         }
     }
-    function onURL(page, mode) {
-        switch(mode) {
-            case "exact":
-                return url === `${origin}${page}`;
-            case "relative":
-                return url.includes(page);
-            default:
-                console.error("InjectJS: Specify a matching mode.");
+    /**
+     * Check whether the page the user is on is equivalent to param "page".
+     * @param {string} page Specify what URL to check for.
+     * @param {boolean} exact Whether it should check for the exact URL or relative.
+     * @returns {boolean} True or false
+     */
+    function onURL(page, exact) {
+        if(exact) {
+            return url === `${origin}${page}`;
+        } else {
+            return url.includes(page);
         }
     }
     if(Option("disable") == "true") {
@@ -86,7 +93,10 @@
     if(Option("disable_syntax") != "true") { code.addEventListener("keydown", Syntax); }
     btn.addEventListener("click", InjectCode);
     option_btn.addEventListener("click", () => { location = "/inject-js/options"; });
-
+    /**
+     * Syntax properties for autocomplete "(", "{", and strings.
+     * @param {event} e Returns an event to handle accordingly.
+     */
     function Syntax(e) {
         if(e.key === "{") {
             e.preventDefault();
