@@ -44,8 +44,9 @@
     if(Option("disable") == "true") {
         document.addEventListener("keyup", function(e) {
             e.preventDefault();
-            if(e.ctrlKey && e.key === "q") {
-                location = "/inject-js/options";
+            if(e.ctrlKey && e.key === ".") {
+                localStorage.setItem("inject-js:disable", false);
+                location.reload();
             }
         });
         return;
@@ -128,9 +129,8 @@
     }
 
     function InjectCode() {
-        const code = document.querySelector(".js-code-inject").value;
         try {
-            eval(code);
+            eval(code.value);
         } catch (e) {
             if(Option("alert_errors") == "true") {
                 alert(e.message);
