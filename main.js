@@ -58,7 +58,7 @@
         });
         return;
     }
-    if(onURL("/inject-js/", "exact")) {
+    if(onURL("/inject-js/", true)) {
         location = "https://github.com/YTXaos/InjectJS";
     }
     Option("startup_log") == "true" && (console.info("InjectJS Loaded. Press Ctrl + Q to topen"));
@@ -190,7 +190,7 @@
         }
         popup.classList.toggle("show");
     }
-    if(onURL("/inject-js/options", "exact")) {
+    if(onURL("/inject-js/options", true)) {
         OptionsPage();
     }
     document.addEventListener("keyup", function(e) {
