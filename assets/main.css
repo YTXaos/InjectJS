@@ -1,3 +1,4 @@
+@import url(https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/fontawesome.css);
 .js-injector-popup {
   position: fixed;
   z-index: 9999;
@@ -101,6 +102,41 @@
 .js-options-btn:active {background: #0eac20}
 .js-injector-popup.show {
   display: block !important;
+}
+.js-injector-logs {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: fixed;
+  z-index: 9999;
+  overflow: hidden auto;
+  display: none;
+}
+.js-log {
+  font-size: 1rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  display: inline-block;
+}
+.js-log.warning {
+  color: rgb(255, 229, 79);
+}
+.js-log.error {
+  color: rgb(255, 82, 82);
+}
+.js-logs-close {
+  font-size: 1.4rem;
+  color: white;
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  cursor: pointer;
 }
 @media (prefers-color-scheme: dark) {
     .js-code-inject {
