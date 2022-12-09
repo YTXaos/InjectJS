@@ -36,6 +36,38 @@
         }
     }
     /**
+     * Create a log node.
+     * @param {string} type The type of log to create.
+     * @param {string} icon The icon that the message should have.
+     * @param {string} msg The message to output in the logs.
+     */
+    function createLog(type, icon, msg) {
+        const elm = document.querySelector(".js-injector-logs");
+        let msg_type;
+        type === "warning" && (msg_type = "WARN") || (msg_type = type.toUpperCase());
+        elm.innerHTML += `
+        <div class="js-log ${type}">
+            [<i class="${icon}"></i>&nbsp;<span class="time-date"></span>&nbsp;${msg_type}]:&nbsp;
+            <span class="js-log-message">
+                ${msg}
+            </span>
+        </div>`;
+    }
+    const logs = {
+        info(msg) { createLog("info", "fa-solid fa-circle-info", msg); },
+        warn(msg) { createLog("warning", "fa-solid fa-circle-exclamation", msg); },
+        error(msg) { createLog("error", "fa-solid fa-triangle-exclamation", msg); }
+    }
+    console.log, console.info = function(info) {
+        logs.info(info);
+    }
+    console.warn = function(warning) {
+        logs.warn(warning);
+    }
+    console.error = function(err) {
+        logs.error(err);
+    }
+    /**
      * Check whether the page the user is on is equivalent to param "page".
      * @param {string} page Specify what URL to check for.
      * @param {boolean} exact Whether it should check for the exact URL or relative.
@@ -63,8 +95,11 @@
     }
     Option("startup_log") == "true" && (console.info("InjectJS Loaded. Press Ctrl + Q to topen"));
     const popup = document.createElement("div"),
-        style = document.createElement("style");
+        style = document.createElement("style"),
+        log = document.createElement("div");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
+    log.setAttribute("class", "js-injector-logs");
+    log.style.display = "none";
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
     popup.innerHTML = `<label class="js-inject-header">
@@ -76,6 +111,7 @@
         <button class="execute-code" disabled>Execute</button>
         <button class="js-options-btn">Options</button>
     </div>`;
+    document.body.append(log);
     document.head.prepend(style);
     document.body.prepend(popup);
 
@@ -142,6 +178,7 @@
         try {
             eval(code.value);
         } catch (e) {
+            logs.error(e);
             if(Option("alert_errors") == "true") {
                 alert(e.message);
             } else {
@@ -152,6 +189,10 @@
 
     function ShowInjector() {
         dragElement(document.querySelector(".js-injector-popup"));
+        /**
+         * Makes an elemenet draggable around the screen.
+         * @param {string} elmnt Select an element from the DOM to become draggable
+         */
         function dragElement(elmnt) {
             var pos1 = 0,
                 pos2 = 0,
