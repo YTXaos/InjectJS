@@ -1,6 +1,10 @@
 const storage = localStorage;
+/**
+ * Replace the normal `console.error()` to check for unexpected errors.
+ * @param {*} err 
+ */
 console.error = function(err) {
-  if(err.includes("onmousedown") || err.includes("properties of null")) {
+  if(err.includes("onmousedown") || err.includes("addEventListener")) {
     alert("Please reload this page.");
   } else {
     console.warn("ERROR: "+err);
