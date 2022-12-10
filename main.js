@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name             InjectJS
 // @namespace        http://github.com/YTXaos/InjectJS
-// @version          1.28
+// @version          1.29
 // @description      Inject Javascript into almost any website.
 // @description:es   Inyecte Javascript en casi cualquier sitio web
 // @description:fr   Injectez Javascript dans presque tous les sites Web
@@ -123,9 +123,9 @@
     code.addEventListener("input", CheckCode);
     log_btn.addEventListener("click", function() {
         document.querySelector(".js-injector-logs").setAttribute("style", "display: block !important");
-    });
-    document.getElementById("js-close").addEventListener("click", function() {
-        document.querySelector(".js-injector-logs").setAttribute("style", "");
+        document.getElementById("js-close").addEventListener("click", function() {
+            document.querySelector(".js-injector-logs").setAttribute("style", "");
+        });
     });
     if(Option("disable_syntax") != "true") { code.addEventListener("keydown", Syntax); }
     btn.addEventListener("click", InjectCode);
