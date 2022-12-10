@@ -133,10 +133,10 @@
   box-sizing: border-box;
   padding: 0.5rem;
   background: #000;
-  display: flex;
   flex-direction: column;
   gap: 5px;
   position: fixed;
+  top: 0;
   z-index: 9999;
   overflow: hidden auto;
   display: none;
