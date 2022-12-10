@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name             InjectJS
 // @namespace        http://github.com/YTXaos/InjectJS
-// @version          1.27
+// @version          1.28
 // @description      Inject Javascript into almost any website.
 // @description:es   Inyecte Javascript en casi cualquier sitio web
 // @description:fr   Injectez Javascript dans presque tous les sites Web
@@ -58,15 +58,6 @@
         warn(msg) { createLog("warning", "fa-solid fa-circle-exclamation", msg); },
         error(msg) { createLog("error", "fa-solid fa-triangle-exclamation", msg); }
     }
-    console.log, console.info = function(info) {
-        logs.info(info);
-    }
-    console.warn = function(warning) {
-        logs.warn(warning);
-    }
-    console.error = function(err) {
-        logs.error(err);
-    }
     /**
      * Check whether the page the user is on is equivalent to param "page".
      * @param {string} page Specify what URL to check for.
@@ -99,7 +90,7 @@
         log = document.createElement("div");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     log.setAttribute("class", "js-injector-logs");
-    log.innerHTML = '<span class="js-logs-close" title="Close">&times;</span>';
+    log.innerHTML = '<span class="js-logs-close" title="Close" id="js-close">&times;</span>';
     log.style.display = "none";
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
@@ -133,8 +124,8 @@
     log_btn.addEventListener("click", function() {
         document.querySelector(".js-injector-logs").setAttribute("style", "display: block !important");
     });
-    document.querySelector(".js-logs-close").addEventListener("click", function() {
-        document.querySelector(".js-injector-logs").setAttribute("class", "");
+    document.getElementById("js-close").addEventListener("click", function() {
+        document.querySelector(".js-injector-logs").setAttribute("style", "");
     });
     if(Option("disable_syntax") != "true") { code.addEventListener("keydown", Syntax); }
     btn.addEventListener("click", InjectCode);
