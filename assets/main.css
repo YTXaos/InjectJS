@@ -98,8 +98,33 @@
   width: 40%;
   box-sizing: border-box;
 }
-.js-options-btn:hover {background: #1adb30;}
-.js-options-btn:active {background: #0eac20}
+.js-btns-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 5px;
+    margin-top: 5px;
+}
+.show-js-logs {
+  all: revert;
+  background: #33ef4a;
+  border: none;
+  color: white;
+  padding: 0.3em 0.4em;
+  cursor: pointer;
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  position: relative;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.js-options-btn:hover,.show-js-logs:hover {background: #1adb30;}
+.js-options-btn:active,.show-js-logs:active {background: #0eac20}
 .js-injector-popup.show {
   display: block !important;
 }
