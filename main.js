@@ -14,10 +14,17 @@
 // @match            file:///*
 // @icon             https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logo.png
 // @grant            GM_addElement
+// @grant            GM_getResourceText
+// @grant            GM_getResourceURL
 // @license          MIT
 // @downloadURL      https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // @updateURL        https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // @require          https://code.jquery.com/jquery-3.6.0.min.js
+// @resource         MainCSS https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css
+// @resource         OptionsHTML https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html
+// @resource         OptionsJS https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js
+// @resource         Fontawesome https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/fontawesome.css
+// @resource         MainIcon https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logov2.png
 // ==/UserScript==
 
 (function() {
@@ -84,18 +91,20 @@
     if(onURL("/inject-js/", true)) {
         location = "https://github.com/YTXaos/InjectJS";
     }
+    console.log(GM_getResourceText("MainIcon"));
     Option("startup_log") == "true" && (console.info("InjectJS Loaded. Press Ctrl + Q to topen"));
     const popup = document.createElement("div"),
         style = document.createElement("style"),
         log = document.createElement("div");
-    fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
+    style.innerHTML = GM_getResourceText("MainCSS");
+    GM_addElement(document.head, "style", { textContent: GM_getResourceText("Fontawesome") });
     log.setAttribute("class", "js-injector-logs");
     log.innerHTML = '<span class="js-logs-close" title="Close" id="js-close">&times;</span>';
     log.style.display = "none";
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
     popup.innerHTML = `<label class="js-inject-header">
-    <div class="js-logo-needle">.....</div>
+    <div class="js-logo-needle" style="background-image: url(${GM_getResourceURL("MainIcon")})">.....</div>
     Inject<span class="js-logo">JS</span>
 </label>
 <textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" id="js-code-inject"></textarea>
@@ -113,10 +122,8 @@
     function OptionsPage() {
         $("link[rel=stylesheet], style, script").remove();
         document.title = "InjectJS Options";
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => GM_addElement(document.head, "script", {
-            textContent: set
-        }));
+        document.body.innerHTML = GM_getResourceText("OptionsHTML");
+        GM_addElement(document.head, "script", { textContent: GM_getResourceText("OptionsJS") });
     }
     const code = document.querySelector(".js-code-inject"),
         btn = document.querySelector(".execute-code"), option_btn = document.querySelector(".js-options-btn"), log_btn = document.querySelector(".show-js-logs");
