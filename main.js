@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name             InjectJS
 // @namespace        http://github.com/YTXaos/InjectJS
-// @version          1.26
+// @version          1.27
 // @description      Inject Javascript into almost any website.
 // @description:es   Inyecte Javascript en casi cualquier sitio web
 // @description:fr   Injectez Javascript dans presque tous les sites Web
@@ -99,18 +99,22 @@
         log = document.createElement("div");
     fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
     log.setAttribute("class", "js-injector-logs");
+    log.innerHTML = '<span class="js-logs-close" title="Close">&times;</span>';
     log.style.display = "none";
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
     popup.innerHTML = `<label class="js-inject-header">
-            <div class="js-logo-needle">.....</div>
-            Inject<span class="js-logo">JS</span>
-        </label>
-        <textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" id="js-code-inject"></textarea>
-    <div class="js-btns-section">
-        <button class="execute-code" disabled>Execute</button>
-        <button class="js-options-btn">Options</button>
-    </div>`;
+    <div class="js-logo-needle">.....</div>
+    Inject<span class="js-logo">JS</span>
+</label>
+<textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" id="js-code-inject"></textarea>
+<div class="js-btns-section">
+<button class="execute-code" disabled>Execute</button>
+<button class="js-options-btn">Options</button>
+</div>
+<div class="js-btns-column">
+<button class="show-js-logs">Logs</button>
+</div>`;
     document.body.append(log);
     document.head.prepend(style);
     document.body.prepend(popup);
@@ -124,8 +128,11 @@
         }));
     }
     const code = document.querySelector(".js-code-inject"),
-        btn = document.querySelector(".execute-code"), option_btn = document.querySelector(".js-options-btn");
+        btn = document.querySelector(".execute-code"), option_btn = document.querySelector(".js-options-btn"), log_btn = document.querySelector(".show-js-logs");
     code.addEventListener("input", CheckCode);
+    log_btn.addEventListener("click", function() {
+        document.querySelector(".js-injector-logs").setAttribute("style", "display: block !important");
+    })
     if(Option("disable_syntax") != "true") { code.addEventListener("keydown", Syntax); }
     btn.addEventListener("click", InjectCode);
     option_btn.addEventListener("click", () => { location = "/inject-js/options"; });
@@ -178,11 +185,10 @@
         try {
             eval(code.value);
         } catch (e) {
-            logs.error(e);
             if(Option("alert_errors") == "true") {
                 alert(e.message);
             } else {
-                console.error(`InjectJS: ${e.message}`);
+                logs.error(e);
             }
         }
     }
