@@ -159,8 +159,8 @@
   font-size: 1.4rem;
   color: white;
   position: absolute;
-  top: 5px;
-  right: 7px;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
 }
 @media (prefers-color-scheme: dark) {

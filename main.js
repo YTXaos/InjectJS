@@ -132,7 +132,10 @@
     code.addEventListener("input", CheckCode);
     log_btn.addEventListener("click", function() {
         document.querySelector(".js-injector-logs").setAttribute("style", "display: block !important");
-    })
+    });
+    document.querySelector(".js-logs-close").addEventListener("click", function() {
+        document.querySelector(".js-injector-logs").setAttribute("class", "");
+    });
     if(Option("disable_syntax") != "true") { code.addEventListener("keydown", Syntax); }
     btn.addEventListener("click", InjectCode);
     option_btn.addEventListener("click", () => { location = "/inject-js/options"; });
