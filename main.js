@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name             InjectJS
 // @namespace        http://github.com/YTXaos/InjectJS
-// @version          1.26
+// @version          1.30
 // @description      Inject Javascript into almost any website.
 // @description:es   Inyecte Javascript en casi cualquier sitio web
 // @description:fr   Injectez Javascript dans presque tous les sites Web
@@ -14,10 +14,17 @@
 // @match            file:///*
 // @icon             https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logo.png
 // @grant            GM_addElement
+// @grant            GM_getResourceText
+// @grant            GM_getResourceURL
 // @license          MIT
 // @downloadURL      https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // @updateURL        https://raw.githubusercontent.com/YTXaos/InjectJS/main/main.js
 // @require          https://code.jquery.com/jquery-3.6.0.min.js
+// @resource         MainCSS https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css
+// @resource         OptionsHTML https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html
+// @resource         OptionsJS https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js
+// @resource         Fontawesome https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/fontawesome.css
+// @resource         MainIcon https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/logov2.png
 // ==/UserScript==
 
 (function() {
@@ -38,34 +45,24 @@
     /**
      * Create a log node.
      * @param {string} type The type of log to create.
-     * @param {string} icon The icon that the message should have.
      * @param {string} msg The message to output in the logs.
      */
-    function createLog(type, icon, msg) {
+    function createLog(type, msg) {
         const elm = document.querySelector(".js-injector-logs");
         let msg_type;
         type === "warning" && (msg_type = "WARN") || (msg_type = type.toUpperCase());
         elm.innerHTML += `
         <div class="js-log ${type}">
-            [<i class="${icon}"></i>&nbsp;<span class="time-date"></span>&nbsp;${msg_type}]:&nbsp;
+            [InjectJS&nbsp;<span class="time-date"></span>&nbsp;${msg_type}]:&nbsp;
             <span class="js-log-message">
                 ${msg}
             </span>
         </div>`;
     }
     const logs = {
-        info(msg) { createLog("info", "fa-solid fa-circle-info", msg); },
-        warn(msg) { createLog("warning", "fa-solid fa-circle-exclamation", msg); },
-        error(msg) { createLog("error", "fa-solid fa-triangle-exclamation", msg); }
-    }
-    console.log, console.info = function(info) {
-        logs.info(info);
-    }
-    console.warn = function(warning) {
-        logs.warn(warning);
-    }
-    console.error = function(err) {
-        logs.error(err);
+        info(msg) { createLog("info", msg); },
+        warn(msg) { createLog("warning", msg); },
+        error(msg) { createLog("error", msg); }
     }
     /**
      * Check whether the page the user is on is equivalent to param "page".
@@ -95,37 +92,43 @@
     }
     Option("startup_log") == "true" && (console.info("InjectJS Loaded. Press Ctrl + Q to topen"));
     const popup = document.createElement("div"),
-        style = document.createElement("style"),
         log = document.createElement("div");
-    fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/assets/main.css").then(get => get.text()).then(set => style.innerHTML = set);
+    GM_addElement(document.head, "style", { textContent: GM_getResourceText("MainCSS") });
     log.setAttribute("class", "js-injector-logs");
+    log.innerHTML = '<span class="js-logs-close" title="Close" id="js-close">&times;</span>';
     log.style.display = "none";
     popup.setAttribute("class", "js-injector-popup");
     popup.style.display = "none";
     popup.innerHTML = `<label class="js-inject-header">
-            <div class="js-logo-needle">.....</div>
-            Inject<span class="js-logo">JS</span>
-        </label>
-        <textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" id="js-code-inject"></textarea>
-    <div class="js-btns-section">
-        <button class="execute-code" disabled>Execute</button>
-        <button class="js-options-btn">Options</button>
-    </div>`;
+    <div class="js-logo-needle" style="background-image: url(${GM_getResourceURL("MainIcon")})">.....</div>
+    Inject<span class="js-logo">JS</span>
+</label>
+<textarea placeholder="Your code here" class="js-code-inject" spellcheck="false" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" id="js-code-inject"></textarea>
+<div class="js-btns-section">
+<button class="execute-code" disabled>Execute</button>
+<button class="js-options-btn">Options</button>
+</div>
+<div class="js-btns-column">
+<button class="show-js-logs">Logs</button>
+</div>`;
     document.body.append(log);
-    document.head.prepend(style);
     document.body.prepend(popup);
 
     function OptionsPage() {
         $("link[rel=stylesheet], style, script").remove();
         document.title = "InjectJS Options";
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/pages/options.html").then(get => get.text()).then(set => document.body.innerHTML = set);
-        fetch("https://raw.githubusercontent.com/YTXaos/InjectJS/main/options.js").then(get => get.text()).then(set => GM_addElement(document.head, "script", {
-            textContent: set
-        }));
+        document.body.innerHTML = GM_getResourceText("OptionsHTML");
+        GM_addElement(document.head, "script", { textContent: GM_getResourceText("OptionsJS") });
     }
     const code = document.querySelector(".js-code-inject"),
-        btn = document.querySelector(".execute-code"), option_btn = document.querySelector(".js-options-btn");
+        btn = document.querySelector(".execute-code"), option_btn = document.querySelector(".js-options-btn"), log_btn = document.querySelector(".show-js-logs");
     code.addEventListener("input", CheckCode);
+    log_btn.addEventListener("click", function() {
+        document.querySelector(".js-injector-logs").setAttribute("style", "display: flex !important");
+        document.getElementById("js-close").addEventListener("click", function() {
+            document.querySelector(".js-injector-logs").setAttribute("style", "");
+        });
+    });
     if(Option("disable_syntax") != "true") { code.addEventListener("keydown", Syntax); }
     btn.addEventListener("click", InjectCode);
     option_btn.addEventListener("click", () => { location = "/inject-js/options"; });
@@ -178,11 +181,10 @@
         try {
             eval(code.value);
         } catch (e) {
-            logs.error(e);
             if(Option("alert_errors") == "true") {
                 alert(e.message);
             } else {
-                console.error(`InjectJS: ${e.message}`);
+                logs.error(e);
             }
         }
     }
